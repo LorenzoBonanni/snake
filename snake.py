@@ -97,6 +97,7 @@ class Apple(pygame.sprite.Sprite):
         self.rect.x = 0
         self.rect.y = 0
         self.ate = False
+        self.respawn()
 
     def respawn(self):
         self.rect.x = ri(0+self.width, WIDTH-self.width)
@@ -155,9 +156,6 @@ while not game_ended:
             piece.rect.y = 0 - piece.width
 
     # Game logic
-
-    for i in range(len(snake)):
-        snake[i].move(i)
     if head.collide():
         game_ended = True
     if apple.collide():
@@ -166,6 +164,9 @@ while not game_ended:
         tail_group.add(block)
         snake_group.add(block)
         apple.respawn()
+
+    for i in range(len(snake)):
+        snake[i].move(i)
 
     # Display update
     draw_background()
